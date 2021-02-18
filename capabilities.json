@@ -1,0 +1,231 @@
+{
+    "dataRoles": [
+        {
+            "displayName": "Column",
+            "name": "column",
+            "kind": "Grouping"
+        },
+        {
+            "displayName": "Value",
+            "name": "value",
+            "kind": "Measure"
+        }
+    ],
+    "objects": {
+        "line": {
+            "displayName": "Line",
+            "properties": {
+              "fillColor": {
+                "displayName": "Color",
+                "type": {
+                  "fill": {
+                    "solid": {
+                      "color": true
+                    }
+                  }
+                }
+              },
+              "shouldMatchKpiColor": {
+                "displayName": "Match KPI Color",
+                "type": {
+                  "bool": true
+                }
+              },
+              "dataPointStartsKpiColorSegment": {
+                "displayName": "Data Point Starts KPI Color Segment",
+                "type": {
+                  "bool": true
+                }
+              },
+              "lineType": {
+                "displayName": "Type",
+                "type": {
+                  "enumeration": [{
+                    "value": "line",
+                    "displayName": "Line"
+                  }, {
+                    "value": "area",
+                    "displayName": "Area"
+                  }]
+                }
+              },
+              "thickness": {
+                "displayName": "Thickness",
+                "type": {
+                  "numeric": true
+                }
+              },
+              "rawOpacity": {
+                "displayName": "Opacity",
+                "type": {
+                  "numeric": true
+                }
+              },
+              "rawAreaOpacity": {
+                "displayName": "Area Opacity",
+                "type": {
+                  "numeric": true
+                }
+              },
+              "lineStyle": {
+                "displayName": "Style",
+                "type": {
+                  "enumeration": [{
+                    "value": "solidLine",
+                    "displayName": "Solid"
+                  }, {
+                    "value": "dottedLine",
+                    "displayName": "Dotted"
+                  }, {
+                    "value": "dashedLine",
+                    "displayName": "Dashed"
+                  }, {
+                    "value": "dotDashedLine",
+                    "displayName": "Dot-dashed"
+                  }]
+                }
+              },
+              "interpolation": {
+                "displayName": "Interpolation",
+                "type": {
+                  "enumeration": [{
+                    "value": "linear",
+                    "displayName": "Linear"
+                  }, {
+                    "value": "step-before",
+                    "displayName": "Step-before"
+                  }, {
+                    "value": "step-after",
+                    "displayName": "Step-after"
+                  }, {
+                    "value": "basis",
+                    "displayName": "Basis"
+                  }, {
+                    "value": "basis-open",
+                    "displayName": "Basis-open"
+                  }, {
+                    "value": "basis-closed",
+                    "displayName": "Basis-closed"
+                  }, {
+                    "value": "cardinal",
+                    "displayName": "Cardinal"
+                  }, {
+                    "value": "cardinal-open",
+                    "displayName": "Cardinal-open"
+                  }, {
+                    "value": "cardinal-closed",
+                    "displayName": "Cardinal-closed"
+                  }, {
+                    "value": "monotone",
+                    "displayName": "Monotone"
+                  }]
+                }
+              },
+              "interpolationWithColorizedLine": {
+                "displayName": "Interpolation",
+                "type": {
+                  "enumeration": [{
+                    "value": "linear",
+                    "displayName": "Linear"
+                  }, {
+                    "value": "step-before",
+                    "displayName": "Step-before"
+                  }, {
+                    "value": "step-after",
+                    "displayName": "Step-after"
+                  }]
+                }
+              }
+            }
+          },
+        "geoSetting": {
+            "displayName": "GeoSetting",
+            "properties": {
+                "LineWidth": {
+                    "displayName": "LineWidth",
+                    "description": "The stroke with of lines",
+                    "type": {
+                        "numeric":true
+                    }
+                },
+                "ScatterSize": {
+                    "displayName": "ScatterSize",
+                    "description": "The radius of scatter points",
+                    "type": {
+                        "numeric":true
+                    }
+                },
+                "CanvasWidth": {
+                    "displayName": "CanvasWidth",
+                    "description": "The width of the chart area",
+                    "type": {
+                        "numeric":true
+                    }
+                },
+                "CanvasHeight": {
+                    "displayName": "CanvasHeight",
+                    "description": "The width of the chart area",
+                    "type": {
+                        "numeric":true
+                    }
+                },
+                "interpolation": {
+                  "displayName": "Interpolation",
+                  "type": {
+                    "enumeration": [{
+                      "value": "linear",
+                      "displayName": "Linear"
+                    }, {
+                      "value": "step-before",
+                      "displayName": "Step-before"
+                    }, {
+                      "value": "step-after",
+                      "displayName": "Step-after"
+                    }, {
+                      "value": "basis",
+                      "displayName": "Basis"
+                    }, {
+                      "value": "basis-open",
+                      "displayName": "Basis-open"
+                    }, {
+                      "value": "basis-closed",
+                      "displayName": "Basis-closed"
+                    }, {
+                      "value": "cardinal",
+                      "displayName": "Cardinal"
+                    }, {
+                      "value": "cardinal-open",
+                      "displayName": "Cardinal-open"
+                    }, {
+                      "value": "cardinal-closed",
+                      "displayName": "Cardinal-closed"
+                    }, {
+                      "value": "monotone",
+                      "displayName": "Monotone"
+                    }]
+                  }
+                }
+            }
+        }
+    },
+    "dataViewMappings": [
+        {
+            "table": {
+                "rows": {
+                    "select": [
+                        {
+                            "for": {
+                                "in": "column"
+                            }
+                        },
+                        {
+                            "for": {
+                                "in": "value"
+                            }
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}
