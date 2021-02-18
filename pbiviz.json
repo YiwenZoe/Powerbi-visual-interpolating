@@ -1,0 +1,25 @@
+{
+    "visual":{
+        "name":"reactInterpolation",
+        "displayName":"reactInterpolation",
+        "guid":"reactCircleCardF6C87CAA832A42FBBFBF7E66B8C15578",
+        "visualClassName":"Visual",
+        "version":"1.0.1",
+        "description":"This is a interpolating tool",
+        "supportUrl":"https://github.com/YiwenZoe/Powerbi-visual-interpolating",
+        "gitHubUrl":"https://github.com/YiwenZoe/Powerbi-visual-interpolating"
+    },
+    "apiVersion":"2.6.2",
+    "author":{
+        "name":"Yiwen Zhou",
+        "email":"v-yiwzho@microsoft.com"
+    },
+    "assets":{
+        "icon":"assets/icon.png"
+    },
+    "externalJS":null,
+    "style":"style/visual.less",
+    "capabilities":"capabilities.json",
+    "dependencies":null,
+    "stringResources":[]
+}
