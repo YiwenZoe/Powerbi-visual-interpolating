@@ -1,9 +1,9 @@
 {
-  "name": "circle-card-react",
+  "name": "powerbi-visual-interpolating",
   "version": "1.0.1",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Microsoft/powerbi-visuals-circlecard-react"
+    "url": "https://github.com/YiwenZoe/Powerbi-visual-interpolating"
   },
   "scripts": {
     "pbiviz": "pbiviz",
