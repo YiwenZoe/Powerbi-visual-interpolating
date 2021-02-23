@@ -1,80 +1,99 @@
 /**
  * Developed by Yiwen Zhou
- */import powerbiVisualsApi from "powerbi-visuals-api";
-
+ */
+import powerbiVisualsApi from "powerbi-visuals-api";
 import VisualUpdateOptions = powerbiVisualsApi.extensibility.visual.VisualUpdateOptions;
 import DataView = powerbiVisualsApi.DataView;
-
 import DataViewTable = powerbiVisualsApi.DataViewTable;
 import DataViewTableRow = powerbiVisualsApi.DataViewTableRow;
-import DataViewCategorical = powerbiVisualsApi.DataViewCategorical;
-import PrimitiveValue = powerbiVisualsApi.PrimitiveValue;
-import DataViewValueColumnGroup = powerbiVisualsApi.DataViewValueColumnGroup;
-
-export interface ValueTuple{
-    approvalRate: number,
+import {ColDef} from '@material-ui/data-grid';
+import {VictoryLine} from 'victory';
+export interface CompanyData{
     index: number,
-    monthName: string,
-    toolTip: string
+    name: string,
+    data: Map<string,number>
 }
-export interface DataPoint{
-    x: number,
-    y: number
-}
-export interface Domain{
-    x: [number,number]
-    y: [number,number]
-}
+const monthToIndexMap = new Map<string,string>([
+    ["January","01"],
+    ["November","11"],
+    ["December","12"]
+]);
+
 export class TableDataParser{
-    public data;
-    public countryMap: Map<string,boolean>;
-    public valueMap: Map<string,Array<ValueTuple>>;
-    public domain: Domain;
+
+    public visited: Map<string,CompanyData>;
+    public dateMap: Map<string,string>;
+    public cols: Array<string>;
+    public rows: Array<string>;
+    public testRows: Array<Map<string,string>>;
+    public maxLength: number
     constructor(options: VisualUpdateOptions) {
         const dataView: DataView = options.dataViews[0];
         const table: DataViewTable = dataView.table;
-        this.data = table.rows.length;
-        const initalMap = new Map<string,Array<ValueTuple>>();
-        this.countryMap = new Map<string,boolean>();
-        this.valueMap = new Map<string,Array<ValueTuple>>();
-        // for(let i=0;i<table.rows.length;i++){
-        //     if(table.rows[i].length>3){
-        //         this.countryMap.set(table.rows[i][2] as string,false);
-        //     }
-        // }
-        this.domain = {
-            x:[12,12],
-            y:[0.9,0.95]
+        const rows = table.rows;
+        const columns = table.columns;
+        const data = new Array<CompanyData>();
+        const columnIndex = new Map<string,number>();
+        var visited = new Map<string,CompanyData>();
+        var visitedDate = new Map<string,string>();
+        this.dateMap = new Map<string,string>();
+        var mycol = ['name']
+        this.testRows = new Array<Map<string,string>>()
+        var myrow: Array<any> = new Array<any>();
+        for(let i=0;i<columns.length;i++){
+            columnIndex.set(columns[i].displayName,i);
         }
-        table.rows.forEach((row: DataViewTableRow) => {
-            var value:ValueTuple = {
-                approvalRate: row[0] as number,
-                index: row[3] as number,
-                monthName: row[4] as string,
-                toolTip: row[5] as string
-            }
-            var key = row[1] + ',' + row[2]
+        for(let i=0;i<rows.length;i++){
+            var year = rows[i][columnIndex.get("Year") as number] as string
+            var monthString  = rows[i][columnIndex.get("Month") as number] as string
+            var month = monthToIndexMap.get(monthString)
 
-            this.domain.x[0] = Math.min(this.domain.x[0],value.index)
-            this.domain.x[1] = Math.max(this.domain.x[1],value.index)
-            this.domain.y[0] = Math.min(this.domain.y[0],value.approvalRate)
-            this.domain.y[1] = Math.max(this.domain.y[1],value.approvalRate)
+            var day = rows[i][columnIndex.get("Day") as number] as string
+            var companyName = rows[i][columnIndex.get("PI Type") as number] as string
+            var index = rows[i][columnIndex.get("Index") as number] as number
+            var value = rows[i][columnIndex.get("Value") as number] as number
+            var dateString = year + "-" + month + "-" + day
 
-            if(initalMap.has(key)){
-                var prevValue = initalMap.get(key);
+            if(!visited.has(companyName)){
+                var curMap = new Map<string,number>()
             }else{
-                var prevValue = new Array<ValueTuple>();
+                var curMap = visited.get(companyName).data;
             }
+            var comp: CompanyData = {
+                index: index,
+                name: companyName,
+                data: curMap
+            }
+            visited.set(companyName, comp)
+            curMap.set(dateString, value)
 
-            this.countryMap.set(key,true);
-            prevValue.push(value);
-            initalMap.set(key,prevValue)
+            this.dateMap.set(dateString,monthString + year + day)
+        }
+        var maxLength = 0
+        visited.forEach((value,key) => {
+            var row = {id: value.name}
+            var testRow = new Map<string,string>();
+
+            value.data.forEach((v,k) => {
+                var dateString = this.dateMap.get(k)
+                row[dateString] = 0
+                testRow.set(k, (v*100).toFixed(2) + "%")
+            })
+            this.testRows.push(testRow);
+            maxLength = Math.max(maxLength, testRow.size)
+            myrow.push(key)
         })
-        this.domain.x[0] -= 1
-        this.domain.y[0] -= 0.01
-        initalMap.forEach((value: ValueTuple[],key: string) =>{
-            var sortedValue: ValueTuple[] = value.sort((v1:ValueTuple,v2:ValueTuple) => v1.index - v2.index);
-            this.valueMap.set(key,sortedValue);
+
+        this.dateMap.forEach((v,k) => {
+            mycol.push(k)
+            if(mycol.length == 4){
+                mycol.push('Trend')
+            }
         })
+        mycol.push('Trend')
+        this.visited = visited
+        this.cols = mycol
+        this.rows = myrow
+        this.maxLength = maxLength
     }
 }

@@ -46,18 +46,14 @@ export class Visual implements IVisual {
             const parser: TableDataParser = new TableDataParser(options);
             this.viewport = options.viewport;
             this.settings = VisualSettings.parse<VisualSettings>(dataView);
-            console.log("Test settings",this.settings)
-            const {countryMap, valueMap, domain} = parser;
+
             ReactCircleCard.update({
-                countryMap: countryMap,
-                valueMap: valueMap,
-                selected: 'linear',
-                lineValue: this.settings.geoSetting.LineWidth,
-                pointValue: this.settings.geoSetting.ScatterSize,
-                canvasHeight: this.settings.geoSetting.CanvasHeight,
-                canvasWidth: this.settings.geoSetting.CanvasWidth,
-                lineSetting: this.settings.geoSetting.Interpolation,
-                domain: domain
+                companyMap: parser.visited,
+                dateMap: parser.dateMap,
+                cols: parser.cols,
+                rows: parser.rows,
+                testRows: parser.testRows,
+                maxLength: parser.maxLength,
             });
         } else {
             this.clear();
