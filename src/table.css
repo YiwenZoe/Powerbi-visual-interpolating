@@ -1,4 +1,3 @@
-
-.VictoryContainer{
-    border: 0!important;
+.MuiTableCell-body{
+    border-bottom: none!important
 }

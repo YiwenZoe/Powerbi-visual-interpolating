@@ -54,6 +54,8 @@ export class Visual implements IVisual {
                 rows: parser.rows,
                 testRows: parser.testRows,
                 maxLength: parser.maxLength,
+                loading: parser.loading,
+                progress: parser.progress
             });
         } else {
             this.clear();

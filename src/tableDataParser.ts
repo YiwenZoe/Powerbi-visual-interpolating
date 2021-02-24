@@ -26,7 +26,9 @@ export class TableDataParser{
     public cols: Array<string>;
     public rows: Array<string>;
     public testRows: Array<Map<string,string>>;
-    public maxLength: number
+    public maxLength: number;
+    public loading: boolean;
+    public progress: number;
     constructor(options: VisualUpdateOptions) {
         const dataView: DataView = options.dataViews[0];
         const table: DataViewTable = dataView.table;
@@ -40,6 +42,8 @@ export class TableDataParser{
         var mycol = ['name']
         this.testRows = new Array<Map<string,string>>()
         var myrow: Array<any> = new Array<any>();
+        this.loading = columns.length < 7;
+        this.progress = columns.length / 7 * 100;
         for(let i=0;i<columns.length;i++){
             columnIndex.set(columns[i].displayName,i);
         }
