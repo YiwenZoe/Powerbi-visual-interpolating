@@ -14,9 +14,9 @@ export interface CompanyData{
     data: Map<string,number>
 }
 const monthToIndexMap = new Map<string,string>([
-    ["January","01"],
-    ["November","11"],
-    ["December","12"]
+    ["January","Jan"],
+    ["November","Nov"],
+    ["December","Dec"]
 ]);
 
 export class TableDataParser{
@@ -56,7 +56,7 @@ export class TableDataParser{
             var companyName = rows[i][columnIndex.get("PI Type") as number] as string
             var index = rows[i][columnIndex.get("Index") as number] as number
             var value = rows[i][columnIndex.get("Value") as number] as number
-            var dateString = year + "-" + month + "-" + day
+            var dateString = month + " " + year
 
             if(!visited.has(companyName)){
                 var curMap = new Map<string,number>()
@@ -91,10 +91,10 @@ export class TableDataParser{
         this.dateMap.forEach((v,k) => {
             mycol.push(k)
             if(mycol.length == 4){
-                mycol.push('Trend')
+                mycol.push('FY20 MOM Trend')
             }
         })
-        mycol.push('Trend')
+        mycol.push('FY21 MOM Trend')
         this.visited = visited
         this.cols = mycol
         this.rows = myrow

@@ -65,7 +65,7 @@ export class ReactCircleCard extends React.Component<{}, State>{
         
         for(let i=0;i<testRows.length;i++){
             var cells = []
-            cells.push(<TableCell size="small" style={{borderRight: '1px solid black'}}>{rows[i]}</TableCell>)
+            cells.push(<TableCell size="small" style={{borderRight: '1px solid #118dff'}}>{rows[i]}</TableCell>)
             var cellValues = []
             testRows[i].forEach((value,key) => {
                 cells.push(<TableCell size="small" align="center">{value ? value : " "}</TableCell>)
@@ -73,20 +73,20 @@ export class ReactCircleCard extends React.Component<{}, State>{
                 if(cells.length == 4){
                     console.log('cellValue',cellValues)
                     cells.push(
-                        <TableCell style={{width: '45px',height:'8px', borderBottom: 'none!important'}} >
+                        <TableCell style={{ width: '80px', height:'20px', borderBottom: 'none!important'}} >
                             <VictoryLine
                                 style={{
-                                data: { stroke: "#c43a31",strokeWidth: 20 },
+                                data: { stroke: "#118dff",strokeWidth: 10 },
                                 }}
                                 animate={{
                                     duration: 2000,
                                     onLoad: { duration: 1000 }
                                 }}
-                                domain={{x: [1, 3]}}
+                                domain={{x: [1, 11]}}
                                 data={[
                                 { x: 1, y: cellValues[0]},
-                                { x: 2, y: cellValues[1] },
-                                { x: 3, y: cellValues[2] },
+                                { x: 5, y: cellValues[1] },
+                                { x: 10, y: cellValues[2] },
                                 ]}
                             />
                         </TableCell>
@@ -99,21 +99,21 @@ export class ReactCircleCard extends React.Component<{}, State>{
             if(cellValues.length<6){
                 var data = [
                     { x: 1, y: cellValues[3]},
-                    { x: 2, y: cellValues[4] },
+                    { x: 5, y: cellValues[4] },
                     ]
             }else{
                 var data = [
                 { x: 1, y: cellValues[3]},
-                { x: 2, y: cellValues[4] },
-                { x: 3, y: cellValues[5] },
+                { x: 5, y: cellValues[4] },
+                { x: 10, y: cellValues[5] },
                 ]
             }
-            cells.push(<TableCell style={{width: '45px',height:'8px', borderBottom: 'none!important'}}>
+            cells.push(<TableCell style={{width: '80px',height:'20px', borderBottom: 'none!important'}} >
                             <VictoryLine
                                 style={{
-                                data: { stroke: "#c43a31",strokeWidth: 20 },
+                                data: { stroke: "#118dff",strokeWidth: 10 },
                                 }}
-                                domain={{x: [1, 3]}}
+                                domain={{x: [1, 11]}}
                                 animate={{
                                     duration: 2000,
                                     onLoad: { duration: 1000 }
@@ -130,9 +130,13 @@ export class ReactCircleCard extends React.Component<{}, State>{
         var cells = []
         for(let i=0;i<cols.length;i++){
             if(i == 0){
-                cells.push(<TableCell size="small" align="left" style={{borderBottom: '1px solid black'}}>{cols[i]}</TableCell>)
+                cells.push(<TableCell size="small" align="left" style={{borderBottom: '1px solid #118dff'}}>{cols[i]}</TableCell>)
             }else{
-                cells.push(<TableCell size="small" align="center" style={{borderBottom: '1px solid black'}}>{cols[i]}</TableCell>)
+                if(i == 4){
+                    cells.push(<TableCell  align="center" style={{width: '200px!important', borderBottom: '1px solid #118dff'}}>{cols[i]}</TableCell>)
+                }else{
+                    cells.push(<TableCell size="small" align="center" style={{ borderBottom: '1px solid #118dff'}}>{cols[i]}</TableCell>)
+                }
             }
         }
         const tableHead = <TableRow>
