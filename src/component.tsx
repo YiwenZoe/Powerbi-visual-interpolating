@@ -12,6 +12,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import './table.css';
+import Axios from 'axios';
 import {
     VictoryLine
 } from "victory";
@@ -58,6 +59,12 @@ export class ReactCircleCard extends React.Component<{}, State>{
     }
     render(){
         const {rows,cols,testRows,maxLength, loading, progress} = this.state
+        Axios.get('https://microsoft.sharepoint.com/teams/CoP/Shared%20Documents/General/CoP_stuff/COP%20EPA%20report%20FY21%20MasterWorkbook.xlsx?raw=true')
+        .then((res) => {
+            console.log('result is',res)
+        }).catch((error) => {
+            console.log('error is',error)
+        })
         if(loading){
             return <LinearDeterminate progress={progress}></LinearDeterminate>
         }
@@ -97,9 +104,10 @@ export class ReactCircleCard extends React.Component<{}, State>{
                 cells.push(<TableCell size="small" align="center"></TableCell>)
             }
             if(cellValues.length<6){
+                console.log('cellValues length :',cellValues.length,cellValues)
                 var data = [
-                    { x: 1, y: cellValues[3]},
-                    { x: 5, y: cellValues[4] },
+                    { x: 5, y: cellValues[3]},
+                    { x: 10, y: cellValues[4] },
                     ]
             }else{
                 var data = [

@@ -18,6 +18,7 @@
     "@turf/turf": "^6.3.0",
     "@types/react": "^16.9.34",
     "@types/react-dom": "^16.9.7",
+    "axios": "^0.21.1",
     "commons-math-interpolation": "^2.2.2",
     "core-js": "^3.6.5",
     "powerbi-visuals-api": "^2.6.2",
