@@ -39,6 +39,15 @@ export const initialState: State = {
     loading: true,
     progress: 0
 }
+
+const monthToIndexMap = new Map<string, number>([
+    ['Nov 2019',1],
+    ['Dec 2019',5],
+    ['Jan 2020',10],
+    ['Nov 2020',1],
+    ['Dec 2020',5],
+    ['Jan 2021',10]
+])
 export class ReactCircleCard extends React.Component<{}, State>{
     private static updateCallback: (data: object) => void = null;
     public static update(newState: State) {
@@ -74,9 +83,41 @@ export class ReactCircleCard extends React.Component<{}, State>{
             var cells = []
             cells.push(<TableCell size="small" style={{borderRight: '1px solid #118dff'}}>{rows[i]}</TableCell>)
             var cellValues = []
-            testRows[i].forEach((value,key) => {
-                cells.push(<TableCell size="small" align="center">{value ? value : " "}</TableCell>)
-                cellValues.push(parseFloat(value.replace('%','')))
+            var keyValues = []
+            // testRows[i].forEach((value,key) => {
+            //     cells.push(<TableCell size="small" align="center">{value ? value : " "}</TableCell>)
+            //     cellValues.push(parseFloat(value.replace('%','')))
+            //     keyValues.push(key)
+            //     if(cells.length == 4){
+            //         console.log('cellValue',cellValues)
+            //         cells.push(
+            //             <TableCell style={{ width: '80px', height:'20px', borderBottom: 'none!important'}} >
+            //                 <VictoryLine
+            //                     style={{
+            //                     data: { stroke: "#118dff",strokeWidth: 10 },
+            //                     }}
+            //                     animate={{
+            //                         duration: 2000,
+            //                         onLoad: { duration: 1000 }
+            //                     }}
+            //                     domain={{x: [1, 11]}}
+            //                     data={[
+            //                     { x: monthToIndexMap.get(keyValues[0]), y: cellValues[0]},
+            //                     { x: monthToIndexMap.get(keyValues[1]), y: cellValues[1] },
+            //                     { x: monthToIndexMap.get(keyValues[2]), y: cellValues[2] },
+            //                     ]}
+            //                 />
+            //             </TableCell>
+            //             )
+            //     }
+            // })
+            monthToIndexMap.forEach((value,key) => {
+                cells.push(<TableCell size="small" align="center">{testRows[i].get(key) ? testRows[i].get(key) : " "}</TableCell>)
+                if(testRows[i].has(key)){
+                    cellValues.push(parseFloat(testRows[i].get(key).replace('%','')))
+                    keyValues.push(key)
+                }
+                
                 if(cells.length == 4){
                     console.log('cellValue',cellValues)
                     cells.push(
@@ -91,9 +132,9 @@ export class ReactCircleCard extends React.Component<{}, State>{
                                 }}
                                 domain={{x: [1, 11]}}
                                 data={[
-                                { x: 1, y: cellValues[0]},
-                                { x: 5, y: cellValues[1] },
-                                { x: 10, y: cellValues[2] },
+                                { x: monthToIndexMap.get(keyValues[0]), y: cellValues[0]},
+                                { x: monthToIndexMap.get(keyValues[1]), y: cellValues[1] },
+                                { x: monthToIndexMap.get(keyValues[2]), y: cellValues[2] },
                                 ]}
                             />
                         </TableCell>
@@ -104,16 +145,16 @@ export class ReactCircleCard extends React.Component<{}, State>{
                 cells.push(<TableCell size="small" align="center"></TableCell>)
             }
             if(cellValues.length<6){
-                console.log('cellValues length :',cellValues.length,cellValues)
+                console.log('TestRows',keyValues)
                 var data = [
-                    { x: 5, y: cellValues[3]},
-                    { x: 10, y: cellValues[4] },
+                    { x: monthToIndexMap.get(keyValues[3]), y: cellValues[3]},
+                    { x: monthToIndexMap.get(keyValues[4]), y: cellValues[4] },
                     ]
             }else{
                 var data = [
-                { x: 1, y: cellValues[3]},
-                { x: 5, y: cellValues[4] },
-                { x: 10, y: cellValues[5] },
+                { x: monthToIndexMap.get(keyValues[3]), y: cellValues[3]},
+                { x: monthToIndexMap.get(keyValues[4]), y: cellValues[4] },
+                { x: monthToIndexMap.get(keyValues[5]), y: cellValues[5] },
                 ]
             }
             cells.push(<TableCell style={{width: '80px',height:'20px', borderBottom: 'none!important'}} >
