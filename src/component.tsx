@@ -41,12 +41,12 @@ export const initialState: State = {
 }
 
 const monthToIndexMap = new Map<string, number>([
-    ['Nov 2019',1],
-    ['Dec 2019',5],
-    ['Jan 2020',10],
-    ['Nov 2020',1],
-    ['Dec 2020',5],
-    ['Jan 2021',10]
+    ['Dec 2019',1],
+    ['Jan 2020',5],
+    ['Feb 2020',10],
+    ['Dec 2020',1],
+    ['Jan 2021',5],
+    ['Feb 2021',10]
 ])
 export class ReactCircleCard extends React.Component<{}, State>{
     private static updateCallback: (data: object) => void = null;
@@ -160,7 +160,7 @@ export class ReactCircleCard extends React.Component<{}, State>{
             cells.push(<TableCell style={{width: '80px',height:'20px', borderBottom: 'none!important'}} >
                             <VictoryLine
                                 style={{
-                                data: { stroke: "#118dff",strokeWidth: 10 },
+                                data: { stroke: "#9d9d9d",strokeWidth: 10 },
                                 }}
                                 domain={{x: [1, 11]}}
                                 animate={{

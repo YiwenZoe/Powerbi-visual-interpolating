@@ -16,7 +16,8 @@ export interface CompanyData{
 const monthToIndexMap = new Map<string,string>([
     ["January","Jan"],
     ["November","Nov"],
-    ["December","Dec"]
+    ["December","Dec"],
+    ["February","Feb"]
 ]);
 
 export class TableDataParser{
