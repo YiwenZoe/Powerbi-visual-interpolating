@@ -48,14 +48,14 @@ export class Visual implements IVisual {
             this.settings = VisualSettings.parse<VisualSettings>(dataView);
 
             ReactCircleCard.update({
-                companyMap: parser.visited,
-                dateMap: parser.dateMap,
-                cols: parser.cols,
-                rows: parser.rows,
-                testRows: parser.testRows,
-                maxLength: parser.maxLength,
-                loading: parser.loading,
-                progress: parser.progress
+                // companyMap: parser.visited,
+                // dateMap: parser.dateMap,
+                // cols: parser.cols,
+                // rows: parser.rows,
+                // testRows: parser.testRows,
+                // maxLength: parser.maxLength,
+                // loading: parser.loading,
+                // progress: parser.progress
             });
         } else {
             this.clear();

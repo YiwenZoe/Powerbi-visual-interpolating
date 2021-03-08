@@ -1,8 +1,8 @@
 {
     "visual":{
-        "name":"reactTable",
-        "displayName":"reactTable",
-        "guid":"reactTableF6C87CAA832A42FBBFBF7E66B8C15578",
+        "name":"reactTreeTable",
+        "displayName":"reactTreeTable",
+        "guid":"reactTreeTableF6C87CAA832A42FBBFBF7E66B8C15578",
         "visualClassName":"Visual",
         "version":"1.0.1",
         "description":"This is a table build with React",
