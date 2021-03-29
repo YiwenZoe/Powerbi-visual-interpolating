@@ -17,7 +17,15 @@ const monthToIndexMap = new Map<string,string>([
     ["January","Jan"],
     ["November","Nov"],
     ["December","Dec"],
-    ["February","Feb"]
+    ["February","Feb"],
+    ["March","Mar"],
+    ["April","Apr"],
+    ["May","May"],
+    ["June","Jun"],
+    ["July","Jul"],
+    ["August","Aug"],
+    ["September","Sep"],
+    ["October","Oct"],    
 ]);
 
 export class TableDataParser{
